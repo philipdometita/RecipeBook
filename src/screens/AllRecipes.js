@@ -5,19 +5,11 @@ import {
     FlatList,
     Alert,
     useWindowDimensions,
-    Text,
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import uuid from 'react-native-uuid'
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-    renderers
-} from 'react-native-popup-menu';
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setRecipeID, setRecipes } from '../redux/actions'
@@ -38,9 +30,6 @@ const Recipes = ({ navigation }) => {
     // get device screen height and width
     const { height, width } = useWindowDimensions()
 
-    // set up renderer for react-native-popup-menu
-    const { Popover } = renderers;
-
     // state for the search bar
     const [search, setSearch] = useState('')
 
@@ -56,21 +45,6 @@ const Recipes = ({ navigation }) => {
             )
         })
     })
-
-    // confirmation menu for deleting a recipe
-    // id: id of recipe to delete
-    // recipeName: name of recipe to be deleted
-    const confirmDelete = (id, recipeName) => {
-        Alert.alert('Are you sure?', `Delete recipe: ${recipeName}?`, [
-            {
-                text: 'Cancel',
-            },
-            {
-                text: 'Delete Recipe',
-                onPress: () => deleteRecipe(id)
-            }
-        ])
-    }
 
     // method for deleting a recipe. updates async storage and redux
     // id: id of recipe to be deleted
@@ -177,26 +151,9 @@ const Recipes = ({ navigation }) => {
                 numColumns={2}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
-                    <Menu
-                        renderer={Popover}
-                        rendererProps={{ preferredPlacement: 'bottom', anchorStyle: { backgroundColor: Colors.gold } }}
-                    >
-                        <MenuTrigger triggerOnLongPress={true} onAlternativeAction={() => goToRecipe(item.Id)}>
-                            <View style={styles.item}>
-                                <Card recipe={item} width={width} height={height} />
-                            </View>
-                        </MenuTrigger>
-                        <MenuOptions style={ styles.popOver }>
-                            <MenuOption style={styles.deleteOption} onSelect={() => confirmDelete(item.Id, item.Title)}>
-                            <Text style={[styles.deleteText, GlobalStyles.textMedium]}>Delete Recipe</Text>
-                                <MaterialCommunityIcons
-                                    name={'trash-can-outline'}
-                                    size={normalizeSize(20)}
-                                    color={'red'}
-                                />
-                            </MenuOption>
-                        </MenuOptions>
-                    </Menu>
+                    <View style={styles.item}>
+                        <Card recipe={item} width={width} deleteRecipe={deleteRecipe} goToRecipe={goToRecipe} />
+                    </View> 
                 )}
             />
 
@@ -244,26 +201,12 @@ const styles = StyleSheet.create({
     cards: {
         justifyContent: 'space-around',
     },
-    popOver: {
-        borderWidth: normalizeWidth(1.5),
-        borderColor: Colors.gold,
-        paddingHorizontal: normalizeWidth(15),
-        paddingVertical: normalizeHeight(10)
-    },
     thinLine: {
         width: '100%',
         borderBottomColor: Colors.gold,
         borderBottomWidth: normalizeWidth(1),
         marginBottom: normalizeHeight(10),
         marginTop: normalizeHeight(2)
-    },
-    deleteOption: {
-        flexDirection: 'row',
-    },
-    deleteText: {
-        color: 'red',
-        marginRight: normalizeWidth(5),
-        fontWeight: 'bold'
     }
 })
 

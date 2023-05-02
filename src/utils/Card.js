@@ -3,14 +3,26 @@ import {
     StyleSheet,
     Image,
     Text,
+    Alert,
+    ScrollView
 } from "react-native"
-import { GlobalStyles, Colors, normalizeHeight, normalizeWidth } from "./GlobalStyles"
+import {
+    Menu,
+    MenuOptions,
+    MenuOption,
+    MenuTrigger,
+    renderers
+} from 'react-native-popup-menu'
+import { useState } from 'react'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
+import { GlobalStyles, Colors, normalizeHeight, normalizeWidth, normalizeSize } from "./GlobalStyles"
 
 // component for rendering recipe card on AllRecipes screen
 // recipe: recipe to be rendered
 // width: width of device screen
 // height: height of device screen
-const Card = ({ recipe, width, height }) => {
+const Card = ({ recipe, width, deleteRecipe, goToRecipe}) => {
     let thumbWidth = (width / 2.3)
 
     // months array to display month string instead of number
@@ -18,24 +30,69 @@ const Card = ({ recipe, width, height }) => {
 
     const imageStyle = { width: thumbWidth, height: thumbWidth }
 
-    return (
-        <View style={[styles.card, {width: thumbWidth}]}>
-            {recipe.Picture
-                // image component if recipe has picture saved
-                ? <Image
-                    style={imageStyle}
-                    source={{uri: recipe.Picture}}
-                  />
-                // default image if no image is provided for the recipe
-                : <Image
-                    style={imageStyle}
-                    source={require('../assets/forkAndSpoon.png')}
-                    tintColor={Colors.gold}
-                  />
+    // margin for popover to appear at bottom of card
+    const [popOverMargin, setPopOverMargin] = useState(0)
+
+    // set up renderer for react-native-popup-menu
+    const { Popover } = renderers;
+
+    // confirmation menu for deleting a recipe
+    // id: id of recipe to delete
+    // recipeName: name of recipe to be deleted
+    const confirmDelete = (id, recipeName) => {
+        Alert.alert('Are you sure?', `Delete recipe: ${recipeName}?`, [
+            {
+                text: 'Cancel',
+            },
+            {
+                text: 'Delete Recipe',
+                onPress: () => deleteRecipe(id)
             }
+        ])
+    }
+
+    return (
+        <View
+            style={[styles.card, { width: thumbWidth }]}
+            onLayout={event => {
+                const { height } = event.nativeEvent.layout
+                setPopOverMargin(height - thumbWidth) // calculate margintop for popover
+            }}
+        >
+            <Menu
+                renderer={Popover}
+                rendererProps={{ preferredPlacement: 'bottom', anchorStyle: { backgroundColor: Colors.gold, marginTop: popOverMargin } }}
+            >
+                <MenuTrigger triggerOnLongPress={true} onAlternativeAction={() => goToRecipe(recipe.Id)}>
+                    {recipe.Picture
+                        // image component if recipe has picture saved
+                        ? <Image
+                            style={imageStyle}
+                            source={{uri: recipe.Picture}}
+                        />
+                        // default image if no image is provided for the recipe
+                        : <Image
+                            style={imageStyle}
+                            source={require('../assets/forkAndSpoon.png')}
+                            tintColor={Colors.gold}
+                        />
+                    }
+                </MenuTrigger>
+                {/* delete recipe popover menu option */}
+                <MenuOptions style={ styles.popOver }>
+                    <MenuOption style={styles.deleteOption} onSelect={() => confirmDelete(recipe.Id, recipe.Title)}>
+                    <Text style={[styles.deleteText, GlobalStyles.textMedium]}>Delete Recipe</Text>
+                        <MaterialCommunityIcons
+                            name={'trash-can-outline'}
+                            size={normalizeSize(20)}
+                            color={'red'}
+                        />
+                    </MenuOption>
+                </MenuOptions>
+            </Menu>
             <View style={styles.thinLine} />
             <Text style={[GlobalStyles.textMedium, styles.cardText, { width: thumbWidth }]}>{recipe.Title}</Text>
-            <View horizontal={true} style={styles.allTags}>
+            <ScrollView horizontal={true} style={styles.allTags}>
                 {
                     (recipe.Tags && recipe.Tags.length !== 0) &&
                         <>
@@ -46,7 +103,7 @@ const Card = ({ recipe, width, height }) => {
                             ))}
                         </>
                 }
-            </View>
+            </ScrollView>
             <Text style={[styles.cardText, GlobalStyles.textSmall]}>{`${recipe.Date.day} ${months[recipe.Date.month]} ${recipe.Date.year}` }</Text>
         </View>
     )
@@ -78,6 +135,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         overflow: "hidden",
         maxWidth: '100%',
+        paddingTop: normalizeHeight(2),
+        paddingBottom: normalizeHeight(5),
         zIndex: 2,
         elevation: 2
     },
@@ -92,5 +151,19 @@ const styles = StyleSheet.create({
         marginRight: normalizeWidth(5),
         backgroundColor: Colors.whiteGold
     },
+    popOver: {
+        borderWidth: normalizeWidth(1.5),
+        borderColor: Colors.gold,
+        paddingHorizontal: normalizeWidth(15),
+        paddingVertical: normalizeHeight(10)
+    },
+    deleteOption: {
+        flexDirection: 'row',
+    },
+    deleteText: {
+        color: 'red',
+        marginRight: normalizeWidth(5),
+        fontWeight: 'bold'
+    }
 })
 
