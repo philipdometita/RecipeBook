@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "RecipeBook",
+    "name": "Recipe Book",
     "slug": "RecipeBook",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/icon.png",
+    "icon": "./src/assets/icon.png",
     "splash": {
-      "image": "./app/assets/splash.png",
+      "image": "./src/assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#C1933E"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,12 +21,26 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "backgroundColor": "#C1933E"
+      },
+      "package": "com.pdometita.RecipeBook"
     },
     "web": {
-      "favicon": "./app/assets/favicon.png"
+      "favicon": "./src/assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photoPermission": "The app accesses your photos to let you choose a photo for a recipe."
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2cf51e35-4b6a-4fad-9091-bbcc74060b42"
+      }
     }
   }
 }
