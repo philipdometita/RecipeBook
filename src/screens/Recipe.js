@@ -289,7 +289,8 @@ const styles = StyleSheet.create({
         marginRight: normalizeWidth(5),
     },
     ingredientLine: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginBottom: normalizeHeight(3)
     },  
     amount: {
         flex: 3
@@ -301,7 +302,8 @@ const styles = StyleSheet.create({
         marginBottom:  normalizeHeight(20)
     },
     directionLine: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginBottom: normalizeHeight(7)
     },
     listNum: {
         flex: 1

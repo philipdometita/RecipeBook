@@ -168,13 +168,13 @@ const RecipeEdit = ({ navigation }) => {
 
     const handleCookTime = (days, hours, minutes) => {
         let newCookTime = {...cookTime}
-        if (days) {
+        if (days !== null) {
             newCookTime.days = days
         }
-        if (hours) {
+        if (hours !== null) {
             newCookTime.hours = hours
         }
-        if (minutes) {
+        if (minutes !== null) {
             newCookTime.minutes = minutes
         }
         setCookTime(newCookTime)
