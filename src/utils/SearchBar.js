@@ -4,7 +4,9 @@ import {
     TextInput,
     Keyboard,
     TouchableOpacity,
-    Text
+    Text,
+    Linking,
+    Alert
 } from 'react-native';
 import { useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -30,6 +32,12 @@ const SearchBar = ({ search, setSearch, navigation }) => {
 
     // renderer for the pop up menu
     const { Popover } = renderers;
+
+    // open url to site
+    // url: url of website to be opened
+    const openUrl = url => {
+        Linking.openURL(url).catch(err => Alert.alert("Couldn't load page", err))
+    }
 
     return (
         <View style={styles.container}>
@@ -90,6 +98,9 @@ const SearchBar = ({ search, setSearch, navigation }) => {
                                 </MenuOption>    
                                 <MenuOption onSelect={() => navigation.navigate('About')}>
                                     <Text style={GlobalStyles.textMedium}>About this App</Text>
+                                </MenuOption>
+                                <MenuOption onSelect={() => openUrl("https://github.com/philipdometita/RecipeBook")}>
+                                    <Text style={GlobalStyles.textMedium}>Github Page</Text>
                                 </MenuOption>
                             </MenuOptions>    
                         </Menu>
