@@ -2,7 +2,7 @@
   "expo": {
     "name": "Recipe Book",
     "slug": "RecipeBook",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "splash": {
@@ -24,7 +24,8 @@
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#C1933E"
       },
-      "package": "com.pdometita.RecipeBook"
+      "package": "com.pdometita.RecipeBook",
+      "blockedPermissions": ["android.permission.RECORD_AUDIO"]
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
