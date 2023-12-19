@@ -15,6 +15,13 @@ import { setRecipeID } from '../redux/actions'
 
 import { GlobalStyles, Colors, normalizeHeight, normalizeWidth, normalizeSize } from "../utils/GlobalStyles"
 
+
+/**
+ * Screen to display chosen recipe
+ * @param {object} props object containing props passed to the component
+ * @param {object} props.navigation prop provided by stack navigator to access convenience functions for navigation actions
+ * @returns void
+ */
 const Recipe = ({ navigation }) => {
     const { recipes, recipeID } = useSelector(state => state.recipeReducer)
     const dispatch = useDispatch()
@@ -293,7 +300,8 @@ const styles = StyleSheet.create({
         marginBottom: normalizeHeight(3)
     },  
     amount: {
-        flex: 3
+        flex: 3,
+        marginRight: normalizeWidth(10) 
     },
     ingredient: {
         flex: 15
@@ -303,7 +311,7 @@ const styles = StyleSheet.create({
     },
     directionLine: {
         flexDirection: 'row',
-        marginBottom: normalizeHeight(7)
+        marginBottom: normalizeHeight(20)
     },
     listNum: {
         flex: 1

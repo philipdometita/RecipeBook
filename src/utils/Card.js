@@ -18,10 +18,20 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { GlobalStyles, Colors, normalizeHeight, normalizeWidth, normalizeSize } from "./GlobalStyles"
 
-// component for rendering recipe card on AllRecipes screen
-// recipe: recipe to be rendered
-// width: width of device screen
-// height: height of device screen
+/**
+ * Component for rendering recipe card on AllRecipes screen
+ * @param {object} props object containing props passed to the component
+ * @param {object} props.recipe recipe object containing details of recipe
+ * @param {string} props.recipe.Title title for the recipe 
+ * @param {[string]} props.recipe.Tags array containing tags for the recipe 
+ * @param {object} props.recipe.Date date recipe was added
+ * @param {number} props.recipe.Date.day number of day of month recipe was added
+ * @param {number} props.recipe.Date.month number of month recipe was added
+ * @param {number} props.recipe.Date.year number of year recipe was added
+ * @param {number} props.width width of device screen
+ * @param {number} props.height height of device screen
+ * @returns 
+ */
 const Card = ({ recipe, width, deleteRecipe, goToRecipe}) => {
     let thumbWidth = (width / 2.3)
 

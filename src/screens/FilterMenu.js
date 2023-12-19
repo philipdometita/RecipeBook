@@ -16,11 +16,16 @@ import {
 import { Colors, GlobalStyles, normalizeHeight, normalizeSize, normalizeWidth } from "../utils/GlobalStyles"
 import { tags } from "../utils/tags"
 
-// component for displaying menu containing filter options
-// primaryFilter: primaryFilter state from parent
-// setPrimaryFilter: setter for primaryFilter state
-// tagFilter: tagFilter state from parent
-// setTagFilter: setter for tagFilter state
+
+/**
+ * Component for the filter menu displayed on the AllRecipes page
+ * @param {object} props wrapping object
+ * @param {string} props.primaryFilter the main sorting filter state from parent
+ * @param {(string) => void} props.setPrimaryFilter callback to state function to set primaryFilter
+ * @param {[string]} props.tagFilter tags used to filter state from parent
+ * @param {([string]) => void} props.setTagFilter callback to state function to set tagFilter
+ * @returns void
+ */
 const FilterMenu = ({ primaryFilter, setPrimaryFilter, tagFilter, setTagFilter}) => {
 
     // state to control if menu is open or not

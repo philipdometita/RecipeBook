@@ -11,9 +11,13 @@ import uuid from 'react-native-uuid'
 import { GlobalStyles, Colors, normalizeSize, normalizeWidth, normalizeHeight } from "./GlobalStyles"
 import { useRef, useLayoutEffect, useState } from "react"
 
-// component for rendering list of directions
-// directions: directions state from parent (RecipeEdit)
-// setDirections: state setter for directions from parent (RecipeEdit)
+/**
+ * Component for inputing directions on the recipe edit screen
+ * @param {object} props object containing props passed to component
+ * @param {[string]} props.directions array containing directions for recipe
+ * @param {([string]) => void} props.setDirections callback to statefunction to set directions   
+ * @returns 
+ */
 const DirectionsInput = ({ directions, setDirections }) => {
      // refs to focus on newest input
      let inputRef = useRef(null)

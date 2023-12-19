@@ -1,4 +1,6 @@
-// array for the tags available in the app
+/**
+ * array for the tags available in the app
+ */ 
 export const tags = [
     'breakfast',
     'lunch',

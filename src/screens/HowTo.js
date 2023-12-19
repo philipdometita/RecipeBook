@@ -7,7 +7,10 @@ import {
 
 import { GlobalStyles, Colors, normalizeHeight, normalizeWidth } from "../utils/GlobalStyles"
 
-// Component for describing how to use the app
+/** 
+ * Component for describing how to use the app
+ * @returns void
+ */ 
 const HowTo = () => {
     return (
         <ScrollView style={styles.body}>

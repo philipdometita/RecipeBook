@@ -1,3 +1,6 @@
+/**
+ * file containing styles and size normalizing functions used around the app
+ */
 import {
     StyleSheet,
     Dimensions,

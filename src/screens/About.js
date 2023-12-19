@@ -6,7 +6,10 @@ import {
 } from "react-native"
 import { GlobalStyles, Colors, normalizeHeight, normalizeWidth } from "../utils/GlobalStyles"
 
-// About page for the app
+/**
+ * About page for the app and credits
+ * @returns void
+ */
 const About = () => {
     return (
         <ScrollView style={styles.body}>

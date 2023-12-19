@@ -19,8 +19,12 @@ import { GlobalStyles, Colors, normalizeSize, normalizeWidth, normalizeHeight } 
 import SearchBar from '../utils/SearchBar';
 import FilterMenu from './FilterMenu'
 
-// main screen for displaying all saved recipes
-// navigation: from react native navigation
+/**
+ * Main screen for displaying all saved recipes
+ * @param {object} props object containing props passed to the component
+ * @param {object} props.navigation prop provided by stack navigator to access convenience functions for navigation actions
+ * @returns void
+ */
 const Recipes = ({ navigation }) => {
     const dispatch = useDispatch()
     

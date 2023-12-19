@@ -21,11 +21,15 @@ import {
 
 import { GlobalStyles, Colors, normalizeHeight, normalizeWidth, normalizeSize } from "./GlobalStyles"
 
-// Search bar component for the all recipes screen
-// based on tutorial by Kevin Tomas https://blog.logrocket.com/create-react-native-search-bar-from-scratch/
-// search: state from parent that contains search phrase
-// setSearch: setter for the state from the parent
-// navigation: from react navigation for navigating to other screens
+/**
+ * Search bar component for the AllRecipes screen'
+ * based on tutorial by Kevin Tomas https://blog.logrocket.com/create-react-native-search-bar-from-scratch/
+ * @param {object} props object containing props passed to the component 
+ * @param {string} props.search state from parent containing search phrase
+ * @param {(string) => void} props.setSearch callback to state function to set search phrase
+ * @param {object} props.navigation prop provided by stack navigator to access convenience functions for navigation actions
+ * @returns void
+ */
 const SearchBar = ({ search, setSearch, navigation }) => {
     // state for tracking if the search bar is focused on
     const [sbFocused, setSbFocused] = useState(false)

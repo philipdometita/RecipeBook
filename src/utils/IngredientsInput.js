@@ -11,9 +11,16 @@ import uuid from 'react-native-uuid'
 import { GlobalStyles, Colors, normalizeSize, normalizeWidth, normalizeHeight } from "./GlobalStyles"
 import { useRef, useLayoutEffect, useState } from "react"
 
-// component for rendering list of ingredient inputs
-// ingredients: ingredients state from parent (RecipeEdit)
-// setIngredients: state setter for ingredients from parent (RecipeEdit)
+/**
+ * Component for inputing ingredients and their amounts on the recipe edit screen
+ * @param {object} props object containing props passed to component
+ * @param {object} props.ingredients object containing ingredients for recipe
+ * @param {object} props.ingredients.ingredientID key for ingredient 
+ * @param {string} props.ingredients.ingredientID.amount amount of ingredient 
+ * @param {string} props.ingredients.ingredientID.ingredient type of ingredient 
+ * @param {(object) => void} props.setIngredients callback to state function to set ingredients   
+ * @returns void
+ */
 const IngredientsInput = ({ ingredients, setIngredients }) => {
 
     // refs to focus on newest input

@@ -38,6 +38,10 @@ const AppWrapper = () => {
   )
 }
 
+/**
+ * Main component for the app
+ * @returns void
+ */
 const App = () => {
 
   const customFonts = {
@@ -113,7 +117,7 @@ const App = () => {
                 headerTitle: () => (
                   <SearchBar/>
                 ),
-              }} //////////////////////// add button for drop down to about page and settings
+              }}
             />
             {/* screen for displaying specific recipe */}
             <Stack.Screen

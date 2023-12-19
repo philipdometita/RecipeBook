@@ -28,6 +28,12 @@ import { tags } from "../utils/tags"
 import IngredientsInput from "../utils/IngredientsInput"
 import DirectionsInput from "../utils/DirectionsInput"
 
+/**
+ * Screen for entering / editing recipe details
+ * @param {object} props object containing props passed to the component
+ * @param {object} props.navigation prop provided by stack navigator to access convenience functions for navigation actions
+ * @returns void
+ */
 const RecipeEdit = ({ navigation }) => {
     const { recipes, recipeID } = useSelector(state => state.recipeReducer)
     const dispatch = useDispatch()
